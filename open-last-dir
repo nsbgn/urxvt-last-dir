@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+use IPC::Shareable;
+
+my $glue = sprintf 'urxvt-last-dir-%d', $<;
+my %options = (
+    create    => 'yes',
+    exclusive => 0,
+    mode      => 0700,
+    destroy   => 'no',
+);
+
+sub on_init {
+    my ($self) = @_;
+    my $pid;
+    tie $pid, 'IPC::Shareable', $glue, { %options };
+
+    if (defined $pid and $pid ne "") {
+        my $link = sprintf "/proc/%d/cwd", $pid;
+        my $wd = readlink $link;
+        if (-e $wd) {
+            $self->resource("chdir", $wd);
+        }
+    }
+}
