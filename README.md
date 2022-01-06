@@ -1,27 +1,20 @@
-# urxvt-last-dir
+# term-cwd
 
-This is a Perl extension for `urxvt` that allows the user to open a new 
-terminal window in the same directory as the previous one.
+Spawning a terminal in the same directory as the working directory of the 
+current foreground process is quite useful. In `vim`, this is doubly so when 
+combined with [vim-rooter](https://github.com/airblade/vim-rooter).
 
-The original script is courtesy of Raphaël Medaer, as published at 
-<https://raphael.medaer.me/2019/06/21/urxvt-open-current-wd.html>. It has been 
-extended to use the current directory of the *foreground process*, rather than 
-the current directory of the parent shell. This means the working directory 
-inside TUI programs like `lf` or `vim` will be taken into account. The latter 
-is particularly useful when combined with 
-[vim-rooter](https://github.com/airblade/vim-rooter).
+However, environments are subtly different: are we running under X or Wayland? 
+Is the terminal emulator a single instance application? Is the process wrapped 
+in `tmux`? Is the foreground process correctly identified?
 
-Programs like [xcwd](https://github.com/schischi/xcwd) perform a similar 
-function, but explicitly cannot work for daemon-client applications like 
-`urxvtc`+`urxvtd`. They also tend to disregard the foreground process.
+[urxvtperl/](urxvtperl/) contains a Perl extension for urxvt that keeps track 
+of the last directory. It works for `urxvtc`+`urxvtd` and takes into account 
+the foreground process. I may add scripts for other environments later.
 
+See also:
 
-### Installation
+- <https://github.com/schischi/xcwd>
+- <https://github.com/wknapik/lastcwd>
+- <https://gist.github.com/viking/5851049>
 
-Copy or link the scripts to the `~/.urxvt/ext/` directory, then add the 
-following line to your `~/.Xresources`:
-
-    URxvt.perl-ext-common: remember-last-dir
-
-Once you have restarted `urxvtd`, you can call `urxvtc -pe open-last-dir` to 
-open the new process in the same working directory.
