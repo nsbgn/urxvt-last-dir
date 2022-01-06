@@ -7,7 +7,9 @@ The original script is courtesy of Raphaël Medaer, as published at
 <https://raphael.medaer.me/2019/06/21/urxvt-open-current-wd.html>. It has been 
 extended to use the current directory of the *foreground process*, rather than 
 the current directory of the parent shell. This means the working directory 
-inside TUI programs like `vim` or `lf` will be taken into account.
+inside TUI programs like `lf` or `vim` will be taken into account. The latter 
+is particularly useful when combined with 
+[vim-rooter](https://github.com/airblade/vim-rooter).
 
 Programs like [xcwd](https://github.com/schischi/xcwd) perform a similar 
 function, but explicitly cannot work for daemon-client applications like 
