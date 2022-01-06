@@ -20,7 +20,7 @@ sub on_init {
         # Using shell process since `tcgetpgrp` does not work (see
         # github.com/rmedaer/rmedaer.github.io/issues/5)
         my $tpgid = qx/ps p $pid -o tpgid=/;
-        if ($tpgid < 0) {
+        if ($tpgid eq "" or $tpgid < 1) {
             $tpgid = $pid;
         }
 
