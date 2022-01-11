@@ -10,7 +10,10 @@ in `tmux`? Is the foreground process correctly identified?
 
 [urxvtperl/](urxvtperl/) contains a Perl extension for urxvt that keeps track 
 of the last directory. It works for `urxvtc`+`urxvtd` and takes into account 
-the foreground process. I may add scripts for other environments later.
+the foreground process.
+
+Alternatively, you can use the [xcwd.sh](xcwd), which does the same in shell. I 
+may add scripts for other environments later.
 
 See also:
 
