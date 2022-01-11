@@ -1,4 +1,4 @@
-# term-cwd
+# urxvt-cwd
 
 Spawning a terminal in the same directory as the working directory of the 
 current foreground process is quite useful. In `vim`, this is doubly so when 
@@ -6,14 +6,15 @@ combined with [vim-rooter](https://github.com/airblade/vim-rooter).
 
 However, environments are subtly different: are we running under X or Wayland? 
 Is the terminal emulator a single instance application? Is the process wrapped 
-in `tmux`? Is the foreground process correctly identified?
+in `tmux`? Is the foreground process correctly identified? The scripts in this 
+repository are intended for use with `urxvtd`+`urxvtc`. They take into account 
+the foreground process but nothing else.
 
-[urxvtperl/](urxvtperl/) contains a Perl extension for urxvt that keeps track 
-of the last directory. It works for `urxvtc`+`urxvtd` and takes into account 
-the foreground process.
-
-Alternatively, you can use the [xcwd.sh](xcwd), which does the same in shell. I 
-may add scripts for other environments later.
+-   [urxvt-cwd.sh](urxvt-cwd.sh) is a tiny shell script that uses `ps`, `awk` 
+    and `xdotool` to show the current directory of the *focused* terminal. 
+    Invoke with `urxvtc -cd "$(urxvt-cwd.sh)"`.
+-   [urxvtperl/](urxvtperl/) contains a Perl extension for `urxvt` that keeps 
+    track of the *last open* directory instead.
 
 See also:
 
